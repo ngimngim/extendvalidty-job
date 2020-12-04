@@ -28,7 +28,7 @@ func GetDataSubscription(payload Dto.SubscriberInfo, res chan bool)  {
 		if subsinfo.Code=="00"{
 			res<-  true
 		}else{
-			res<- true
+			res<- false
 		}
 
 
