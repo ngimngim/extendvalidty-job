@@ -10,7 +10,7 @@ import (
 
 func GetDataSubscription(payload Dto.SubscriberInfo, res chan bool)  {
 	defer close(res)
-	URL := "http://localhost:8080/mock/subscriberinfo/"
+	URL := "http://extendvalidity-job.herokuapp.com/mock/subscriberinfo/"
 	log.Println("subsinfo request payload : ",payload)
 	var subsinfo Dto.GenericResponse
 	body,_ := json.Marshal(payload)
