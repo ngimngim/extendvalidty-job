@@ -9,7 +9,7 @@ import (
 )
 
 func SetValidity(payload Dto.RplRequest) bool  {
-	URL := "http://localhost:8080/mock/validity/"
+	URL := "http://extendvalidity-job.herokuapp.com/mock/validity/"
 	var rplResp Dto.GenericResponse
 	body,_ := json.Marshal(payload)
 	ioBody:=bytes.NewReader(body)
