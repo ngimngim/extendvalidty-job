@@ -10,4 +10,5 @@ type ResponseEtend struct {
 	Code int `json:"code`
 	Message string `json:"message"`
 	Data RequestExtend `json:"data"`
+	NewExpDate string `json:"new_exp_date"`
 }

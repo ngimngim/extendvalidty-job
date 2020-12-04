@@ -8,6 +8,8 @@ import (
 )
 import "extendvalidity-job/Models/Dto"
 
+
+
 func ExtendValidity(c *gin.Context)  {
 	var req Dto.RequestExtend
 	err := c.BindJSON(&req)
@@ -28,17 +30,27 @@ func ExtendValidity(c *gin.Context)  {
 
 		}
 
-		if Services.GetDataSubscription(subinfo){
-			c.AbortWithStatus(http.StatusBadRequest)
-		}else if Services.GetUpccData(req.Msisdn){
-			c.AbortWithStatus(http.StatusBadRequest)
-		}else if Services.SetValidity(rplPayload){
-			c.AbortWithStatus(http.StatusBadRequest)
-		}else {
-			c.JSON(http.StatusAccepted,
-				Dto.ResponseEtend{http.StatusAccepted,"success",
-					req})
+
+		isExist := make(chan bool)
+		haveQuota := make(chan bool)
+
+		go Services.GetDataSubscription(subinfo,isExist)
+		go Services.GetUpccData(req.Msisdn,haveQuota)
+
+		var subExist = <-isExist
+		var qoutaExsist =<-haveQuota
+
+		if (subExist)&&(qoutaExsist){
+			if !Services.SetValidity(rplPayload){
+				c.AbortWithStatus(http.StatusNotFound)
+			}else {
+				c.JSON(http.StatusAccepted,
+					Dto.ResponseEtend{http.StatusAccepted,"success",
+						req,"13-01-2021"})
+			}
 		}
+
+
 
 
 	}
