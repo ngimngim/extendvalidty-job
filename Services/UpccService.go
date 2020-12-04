@@ -10,7 +10,7 @@ import (
 
 func GetUpccData(msisdn string, res chan bool)  {
 	defer close(res)
-	URL := "http://localhost:8080/mock/upcc/"+msisdn
+	URL := "http://extendvalidity-job.herokuapp.com/mock/upcc/"+msisdn
 	var rplResp Dto.UpccData
 	response,err := http.Get(URL)
 	if err != nil{
