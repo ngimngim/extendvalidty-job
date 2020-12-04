@@ -13,7 +13,9 @@ func SetupRoutes() *gin.Engine  {
 
 	mockGroup := r.Group("/mock")
 	{
-		mockGroup.GET("upcc/:msisdn")
+		mockGroup.GET("upcc/:msisdn",Controllers.UpccMock)
+		mockGroup.POST("subscriberinfo/",Controllers.SubscriberInfoMock)
+		mockGroup.POST("validity/",Controllers.SetValidity)
 	}
 
 	return r

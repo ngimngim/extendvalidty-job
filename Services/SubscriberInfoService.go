@@ -9,7 +9,8 @@ import (
 )
 
 func GetDataSubscription(payload Dto.SubscriberInfo)bool  {
-	URL := "localhost:8080/mock/subscriberinfo/"
+	URL := "http://localhost:8080/mock/subscriberinfo/"
+	log.Println("subsinfo request payload : ",payload)
 	var subsinfo Dto.GenericResponse
 	body,_ := json.Marshal(payload)
 	ioBody:=bytes.NewReader(body)

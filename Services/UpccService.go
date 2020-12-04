@@ -9,7 +9,7 @@ import (
 )
 
 func GetUpccData(msisdn string)bool  {
-	URL := "localhost:8080/mock/upcc/"+msisdn
+	URL := "http://localhost:8080/mock/upcc/"+msisdn
 	var rplResp Dto.UpccData
 	response,err := http.Get(URL)
 	if err != nil{
